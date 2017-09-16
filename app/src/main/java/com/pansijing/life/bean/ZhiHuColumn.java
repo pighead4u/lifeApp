@@ -7,38 +7,40 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * @author: pighead
- * @time: 2017/9/16-下午9:49.
+ * @time: 2017/9/16-下午10:01.
  * @desc:
  */
 
 @Table(database = ZhiHuDB.class)
-public class DiscoverContent extends BaseModel {
+public final class ZhiHuColumn extends BaseModel {
     @Column
-    public String titleImage;
+    public int last_updated;
     @Column
-    public String image_path;
+    public String description;
     @Column
     public String permission;
     @Column
-    public String summary;
+    public int member_id;
     @Column
-    public String copy_permission;
+    public String contribute_permission;
     @Column
     public String translated_comment_permission;
     @Column
-    public int likes;
+    public boolean can_manage;
     @Column
-    public int orig_author_id;
+    public String intro;
     @Column
-    public String publishedTime;
+    public String url_token;
     @Column
-    public String source_url;
+    public int id;
     @Column
-    public int url_token;
+    public String image_path;
+    @Column
+    public String slug;
+    @Column
+    public String apply_reason;
     @PrimaryKey
-    public int slug;
-    @Column
-    public boolean big_title_image;
+    public String name;
     @Column
     public String title;
     @Column
@@ -46,30 +48,20 @@ public class DiscoverContent extends BaseModel {
     @Column
     public String comment_permission;
     @Column
-    public String snapshot_url;
+    public boolean can_post;
     @Column
     public int created;
     @Column
-    public ZhiHuColumn zhiHuColumn;
-    @Column
-    public int comments;
-    @Column
-    public String content;
-    @Column
     public String state;
+    @Column
+    public int followers;
+    @Column
+    public boolean activate_author_requested;
+    @Column
+    public boolean following;
     @Column
     public String image_url;
     @Column
-    public Author author;
-    @Column
-    public String excerpt_title;
-    @Column
-    public String vote_type;
-    @Column
-    public int commentsCount;
-    @Column
-    public int likesCount;
-
-
+    public int articles_count;
 
 }

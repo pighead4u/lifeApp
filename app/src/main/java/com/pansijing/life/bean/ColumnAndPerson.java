@@ -1,75 +1,31 @@
 package com.pansijing.life.bean;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 /**
  * @author: pighead
  * @time: 2017/9/16-下午10:05.
  * @desc:
  */
 
-public final class ColumnAndPerson {
-
-    private int followersCount;
-    private String name;
-    private String url;
-    private int postsCount;
-    private String description;
-    private String slug;
-    private Avatar avatar;
-
-    public int getFollowersCount() {
-        return followersCount;
-    }
-
-    public void setFollowersCount(int followersCount) {
-        this.followersCount = followersCount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public int getPostsCount() {
-        return postsCount;
-    }
-
-    public void setPostsCount(int postsCount) {
-        this.postsCount = postsCount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
+@Table(database = ZhiHuDB.class)
+public final class ColumnAndPerson extends BaseModel {
+    @Column
+    public int followersCount;
+    @PrimaryKey
+    public String name;
+    @Column
+    public String url;
+    @Column
+    public int postsCount;
+    @Column
+    public String description;
+    @Column
+    public String slug;
+    @Column
+    public Avatar avatar;
 
 }

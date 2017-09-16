@@ -15,10 +15,8 @@ import com.pansijing.life.http.RetrofitManager;
 
 import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 
 /**
@@ -61,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<List<DiscoverContent>>() {
                     @Override
                     public void accept(List<DiscoverContent> discoverContents) throws Exception {
+                        for (DiscoverContent item : discoverContents) {
+                            item.save();
+                        }
                         Log.e(TAG, "accept: ");
                     }
                 });
@@ -73,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<List<ColumnAndPerson>>() {
                     @Override
                     public void accept(List<ColumnAndPerson> columnAndPeople) throws Exception {
-                        Log.e(TAG, "accept: column-person");
+                        for (ColumnAndPerson item : columnAndPeople) {
+                            item.save();
+                        }
+                        Log.e(TAG, "accept: zhiHuColumn-person");
                     }
                 });
     }

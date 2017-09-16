@@ -1,28 +1,19 @@
 package com.pansijing.life.bean;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+
 /**
  * @author: pighead
  * @time: 2017/9/16-下午10:00.
  * @desc:
  */
 
+@Table(database = ZhiHuDB.class)
 public final class Avatar {
-    private String id;
-    private String template;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
+    @PrimaryKey
+    public String id;
+    @Column
+    public String template;
 }

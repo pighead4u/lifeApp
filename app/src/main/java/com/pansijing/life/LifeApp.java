@@ -13,5 +13,7 @@ public final class LifeApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        InitManager.init(this);
     }
 }
