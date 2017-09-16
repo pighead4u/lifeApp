@@ -1,0 +1,25 @@
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
+        google()
+        jcenter()
+        // dbflow
+        maven { url "https://www.jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
