@@ -1,4 +1,4 @@
-package com.pansijing.life;
+package com.pansijing.life.utils;
 
 import android.app.Application;
 
