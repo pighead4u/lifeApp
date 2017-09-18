@@ -49,7 +49,7 @@ public class DiscoverContent extends BaseModel {
     public String snapshot_url;
     @Column
     public int created;
-    @Column
+    @Column(typeConverter = ZhiHuColumnConverter.class)
     public ZhiHuColumn zhiHuColumn;
     @Column
     public int comments;
@@ -59,7 +59,7 @@ public class DiscoverContent extends BaseModel {
     public String state;
     @Column
     public String image_url;
-    @Column
+    @Column(typeConverter = AuthorConverter.class)
     public Author author;
     @Column
     public String excerpt_title;

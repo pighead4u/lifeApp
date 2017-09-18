@@ -33,7 +33,7 @@ public final class Author extends BaseModel {
     public String name;
     @Column
     public String profileUrl;
-    @Column
+    @Column(typeConverter = AvatarConverter.class)
     public Avatar avatar;
     @Column
     public boolean isOrgWhiteList;

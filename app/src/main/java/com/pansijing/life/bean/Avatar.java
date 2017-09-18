@@ -16,4 +16,9 @@ public final class Avatar {
     public String id;
     @Column
     public String template;
+
+    @Override
+    public String toString() {
+        return id + "," + template;
+    }
 }

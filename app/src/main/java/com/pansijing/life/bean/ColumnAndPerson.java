@@ -25,7 +25,7 @@ public final class ColumnAndPerson extends BaseModel {
     public String description;
     @Column
     public String slug;
-    @Column
+    @Column(typeConverter = AvatarConverter.class)
     public Avatar avatar;
 
 }
