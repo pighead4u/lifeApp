@@ -6,10 +6,9 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pansijing.life.R;
 
 import java.util.List;
@@ -47,20 +46,19 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
     public void onBindViewHolder(DiscoverViewHolder holder, int position) {
         DiscoverContentBussiness contentBussiness = mData.get(position);
 
-        Glide.with(mContext)
-                .load(contentBussiness.getAvatar())
-                .into(holder.avatar);
+//        holder.avatar.setImageURI(contentBussiness.getAvatar());
+        holder.titleImage.setImageURI(contentBussiness.getTitleImage());
 
-        Glide.with(mContext)
-                .load(contentBussiness.getTitleImage())
-                .into(holder.titleImage);
-
-        holder.name.setText(contentBussiness.getName());
+//        holder.name.setText(contentBussiness.getName());
         holder.title.setText(contentBussiness.getTitle());
-        holder.summary.setText(contentBussiness.getSummary());
-        holder.time.setText(contentBussiness.getDate());
-        holder.likesCount.setText(contentBussiness.getLikesCount());
-        holder.commentsCount.setText(contentBussiness.getCommentsCount());
+//        if (Build.VERSION.SDK_INT >= 24) {
+//            holder.summary.setText(Html.fromHtml(contentBussiness.getSummary(), Html.FROM_HTML_MODE_COMPACT));
+//        } else {
+//            holder.summary.setText(Html.fromHtml(contentBussiness.getSummary()));
+//        }
+//        holder.time.setText(contentBussiness.getDate());
+//        holder.likesCount.setText(contentBussiness.getLikesCount());
+//        holder.commentsCount.setText(contentBussiness.getCommentsCount());
 
     }
 
@@ -72,24 +70,24 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
     public static final class DiscoverViewHolder extends ViewHolder {
 
-        @BindView(R.id.llAvatar)
-        ImageView avatar;
-        @BindView(R.id.txtName)
-        TextView name;
-        @BindView(R.id.org)
-        ImageView org;
+        //        @BindView(R.id.llAvatar)
+//        SimpleDraweeView avatar;
+//        @BindView(R.id.txtName)
+//        TextView name;
+//        @BindView(R.id.org)
+//        SimpleDraweeView org;
         @BindView(R.id.titleImage)
-        ImageView titleImage;
+        SimpleDraweeView titleImage;
         @BindView(R.id.txtTitle)
         TextView title;
-        @BindView(R.id.txtSummary)
-        TextView summary;
-        @BindView(R.id.txtLikesCount)
-        TextView likesCount;
-        @BindView(R.id.txtCommentsCount)
-        TextView commentsCount;
-        @BindView(R.id.txtTime)
-        TextView time;
+//        @BindView(R.id.txtSummary)
+//        TextView summary;
+//        @BindView(R.id.txtLikesCount)
+//        TextView likesCount;
+//        @BindView(R.id.txtCommentsCount)
+//        TextView commentsCount;
+//        @BindView(R.id.txtTime)
+//        TextView time;
 
         public DiscoverViewHolder(View view) {
             super(view);
