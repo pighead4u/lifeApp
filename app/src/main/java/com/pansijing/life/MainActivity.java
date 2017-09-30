@@ -6,10 +6,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.pansijing.life.bean.ColumnAndPerson;
-import com.pansijing.life.bean.DiscoverContent;
+import com.pansijing.life.discover.DiscoverFragment;
 import com.pansijing.life.http.ColumnHttp;
 import com.pansijing.life.http.RetrofitManager;
 
@@ -28,7 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private TextView mTextMessage;
+    DiscoverFragment mDiscoverFragment;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,35 +37,20 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_discover);
-                    getCookies();
+                    getFragmentManager().beginTransaction()
+                            .add(R.id.main_content, mDiscoverFragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_column);
                     getColumns();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_collection);
                     return true;
             }
             return false;
         }
     };
 
-    private void getCookies() {
-        RetrofitManager.getRetrofit().create(ColumnHttp.class)
-                .findNewContent(10, 0)
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<DiscoverContent>>() {
-                    @Override
-                    public void accept(List<DiscoverContent> discoverContents) throws Exception {
-                        for (DiscoverContent item : discoverContents) {
-                            item.save();
-                        }
-                        Log.e(TAG, "accept: ");
-                    }
-                });
-    }
+
 
     private void getColumns() {
         RetrofitManager.getRetrofit().create(ColumnHttp.class)
@@ -87,9 +72,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        initView();
+        initData();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    private void initView() {
+        mDiscoverFragment = new DiscoverFragment();
+
+        getFragmentManager().beginTransaction()
+                .add(R.id.main_content, mDiscoverFragment).commit();
+
+    }
+
+    private void initData() {
     }
 
 }
