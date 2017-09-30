@@ -37,8 +37,16 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.main_content, mDiscoverFragment).commit();
+                    if (mDiscoverFragment.isAdded()) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.main_content, mDiscoverFragment)
+                                .commit();
+                    } else {
+                        getFragmentManager().beginTransaction()
+                                .add(R.id.main_content, mDiscoverFragment)
+                                .commit();
+                    }
+
                     return true;
                 case R.id.navigation_dashboard:
                     getColumns();

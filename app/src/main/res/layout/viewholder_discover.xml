@@ -5,6 +5,7 @@
     android:layout_height="200dp"
     android:layout_margin="4dp"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="4dp"
     app:cardElevation="2dp">
@@ -25,7 +26,11 @@
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:paddingEnd="0dp"
+            android:paddingStart="12dp"
+            android:singleLine="true"
             android:textColor="@color/titleColor"
             android:textSize="14sp" />
 

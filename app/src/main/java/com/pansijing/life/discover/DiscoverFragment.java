@@ -1,8 +1,10 @@
 package com.pansijing.life.discover;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,12 +35,14 @@ import io.reactivex.schedulers.Schedulers;
  * 修改说明：
  */
 
-public class DiscoverFragment extends Fragment {
+public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "DiscoverFragment";
 
     @BindView(R.id.discover_content)
     RecyclerView discoverContentView;
+    @BindView(R.id.discover_refresh)
+    SwipeRefreshLayout discoverRefreshView;
 
     private Unbinder unbinder;
     private DiscoverAdapter mAdapter;
@@ -48,6 +52,7 @@ public class DiscoverFragment extends Fragment {
      */
     private List<DiscoverContentBussiness> mData;
 
+    private boolean mIsRefresh;
 
     @Nullable
     @Override
@@ -63,9 +68,23 @@ public class DiscoverFragment extends Fragment {
     private void initView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         discoverContentView.setLayoutManager(linearLayoutManager);
+
+        discoverRefreshView.setColorSchemeColors(Color.BLUE,
+                Color.GREEN,
+                Color.YELLOW,
+                Color.RED);
+
+        // 设置手指在屏幕下拉多少距离会触发下拉刷新
+        discoverRefreshView.setDistanceToTriggerSync(300);
+        // 设定下拉圆圈的背景
+        discoverRefreshView.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        // 设置圆圈的大小
+        discoverRefreshView.setSize(SwipeRefreshLayout.LARGE);
+
     }
 
     private void initData() {
+        mIsRefresh = false;
         mData = new ArrayList<>();
         mAdapter = new DiscoverAdapter(getActivity(), mData);
 
@@ -100,8 +119,14 @@ public class DiscoverFragment extends Fragment {
                 .subscribe(new Consumer<List<DiscoverContentBussiness>>() {
                     @Override
                     public void accept(List<DiscoverContentBussiness> discoverContents) throws Exception {
-                        mData.addAll(discoverContents);
 
+                        if (mIsRefresh) {
+                            mData.clear();
+                            discoverRefreshView.setRefreshing(false);
+                            mIsRefresh = false;
+                        }
+
+                        mData.addAll(discoverContents);
                         mAdapter.notifyDataSetChanged();
                     }
                 });
@@ -111,5 +136,17 @@ public class DiscoverFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onRefresh() {
+        //检查是否处于刷新状态
+        if (!mIsRefresh) {
+            mIsRefresh = true;
+
+            getCookies();
+        }
+
+
     }
 }
