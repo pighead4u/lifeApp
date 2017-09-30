@@ -81,6 +81,8 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
         // 设置圆圈的大小
         discoverRefreshView.setSize(SwipeRefreshLayout.LARGE);
 
+        discoverRefreshView.setOnRefreshListener(this);
+
     }
 
     private void initData() {
@@ -121,7 +123,7 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
                     public void accept(List<DiscoverContentBussiness> discoverContents) throws Exception {
 
                         if (mIsRefresh) {
-                            mData.clear();
+//                            mData.clear();
                             discoverRefreshView.setRefreshing(false);
                             mIsRefresh = false;
                         }

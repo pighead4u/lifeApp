@@ -92,6 +92,13 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
         public DiscoverViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 }
