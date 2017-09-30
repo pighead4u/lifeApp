@@ -1,5 +1,6 @@
 package com.pansijing.life.discover;
 
+import com.pansijing.life.bean.Avatar;
 import com.pansijing.life.bean.DiscoverContent;
 
 /**
@@ -52,15 +53,20 @@ public final class DiscoverContentBussiness {
 
     public void transforData(DiscoverContent discoverContent) {
         // TODO: zhuhuanhuan 确认头像
-        this.avatar = discoverContent.author.avatar.template;
+        this.avatar = transforAvatarURL(discoverContent.author.avatar);
         this.name = discoverContent.author.name;
         // TODO: zhuhuanhuan 需要转换
         this.date = discoverContent.publishedTime;
-        this.titleImage = discoverContent.titleImage;
+        this.titleImage = discoverContent.image_url;
         this.title = discoverContent.title;
         this.summary = discoverContent.summary;
         this.likesCount = String.valueOf(discoverContent.likesCount);
         this.commentsCount = String.valueOf(discoverContent.commentsCount);
+    }
+
+    private String transforAvatarURL(Avatar avatar) {
+        String url = avatar.template.replace("{id}", avatar.id);
+        return url.replace("{size}", "l");
     }
 
     public String getAvatar() {
