@@ -52,10 +52,8 @@ public final class DiscoverContentBussiness {
     private String commentsCount;
 
     public void transforData(DiscoverContent discoverContent) {
-        // TODO: zhuhuanhuan 确认头像
         this.avatar = transforAvatarURL(discoverContent.author.avatar);
         this.name = discoverContent.author.name;
-        // TODO: zhuhuanhuan 需要转换
         this.date = discoverContent.publishedTime;
         this.titleImage = discoverContent.image_url;
         this.title = discoverContent.title;

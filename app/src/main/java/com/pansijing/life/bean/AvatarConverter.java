@@ -1,32 +1,28 @@
 package com.pansijing.life.bean;
 
-import com.raizlabs.android.dbflow.converter.TypeConverter;
+import org.greenrobot.greendao.converter.PropertyConverter;
 
 /**
- * @author: pighead
- * @time: 2017/9/18-下午8:21.
- * @desc:
+ * 创建者：pighead4u
+ * 创建数据：2017/10/5-下午2:57.
+ * 创建说明：
+ * <p>
+ * 修改说明：
  */
 
-@com.raizlabs.android.dbflow.annotation.TypeConverter
-public class AvatarConverter extends TypeConverter<String, Avatar> {
+public class AvatarConverter implements PropertyConverter<Avatar, String> {
     @Override
-    public String getDBValue(Avatar model) {
-        return model == null ? null : model.id + "," + model.template;
+    public Avatar convertToEntityProperty(String databaseValue) {
+        String[] data = databaseValue.split(",");
+        Avatar avatar = new Avatar();
+        avatar.id = data[0];
+        avatar.template = data[1];
+
+        return avatar;
     }
 
     @Override
-    public Avatar getModelValue(String data) {
-        String[] values = data.split(",");
-        if (values.length < 2) {
-            return null;
-        } else {
-            Avatar avatar = new Avatar();
-            avatar.id = values[0];
-            avatar.template = values[1];
-            return avatar;
-        }
+    public String convertToDatabaseValue(Avatar entityProperty) {
+        return entityProperty.toString();
     }
-
-
 }

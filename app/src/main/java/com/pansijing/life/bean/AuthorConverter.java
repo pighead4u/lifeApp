@@ -1,54 +1,44 @@
 package com.pansijing.life.bean;
 
-import com.raizlabs.android.dbflow.converter.TypeConverter;
+import org.greenrobot.greendao.converter.PropertyConverter;
 
 /**
- * @author: pighead
- * @time: 2017/9/18-下午8:49.
- * @desc:
+ * 创建者：pighead4u
+ * 创建数据：2017/10/5-下午3:08.
+ * 创建说明：Author的数据库映射类
+ * <p>
+ * 修改说明：
  */
 
-public class AuthorConverter extends TypeConverter<String, Author> {
+public final class AuthorConverter implements PropertyConverter<Author, String> {
     @Override
-    public String getDBValue(Author model) {
-        return model == null ? null : model.bio + "," +
-                String.valueOf(model.isFollowing) + "," +
-                model.hash + "," +
-                String.valueOf(model.uid) + "," +
-                String.valueOf(model.isOrg) + "," +
-                model.slug + "," +
-                String.valueOf(model.isFollowed) + "," +
-                model.description + "," +
-                model.name + "," +
-                model.profileUrl + "," +
-                model.avatar + "," +
-                String.valueOf(model.isOrgWhiteList);
+    public Author convertToEntityProperty(String databaseValue) {
+        String[] tmp = databaseValue.split(",");
+
+        Author author = new Author();
+        author.bio = tmp[0];
+        author.isFollowing = Boolean.valueOf(tmp[1]);
+        author.hash = tmp[2];
+        author.uid = Long.valueOf(tmp[3]);
+        author.isOrg = Boolean.valueOf(tmp[4]);
+        author.slug = tmp[5];
+        author.isFollowed = Boolean.valueOf(tmp[6]);
+        author.description = tmp[7];
+        author.name = tmp[8];
+        author.profileUrl = tmp[9];
+        author.isOrgWhiteList = Boolean.valueOf(tmp[10]);
+
+        Avatar avatar = new Avatar();
+        avatar.id = tmp[11];
+        avatar.template = tmp[12];
+
+        author.avatar = avatar;
+
+        return author;
     }
 
     @Override
-    public Author getModelValue(String data) {
-        String[] values = data.split(",");
-        if (values.length < 13) {
-            return null;
-        } else {
-            Author author = new Author();
-            author.bio = values[0];
-            author.isFollowing = Boolean.valueOf(values[1]);
-            author.hash = values[2];
-            author.uid = Long.valueOf(values[3]);
-            author.isOrg = Boolean.valueOf(values[4]);
-            author.slug = values[5];
-            author.isFollowed = Boolean.valueOf(values[6]);
-            author.description = values[7];
-            author.name = values[8];
-            author.profileUrl = values[9];
-            Avatar avatar = new Avatar();
-            avatar.id = values[10];
-            avatar.template = values[11];
-            author.avatar = avatar;
-            author.isOrgWhiteList = Boolean.valueOf(values[12]);
-
-            return author;
-        }
+    public String convertToDatabaseValue(Author entityProperty) {
+        return entityProperty.toString();
     }
 }

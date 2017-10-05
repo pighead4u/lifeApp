@@ -1,8 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+greendao {
+    schemaVersion 1000
+}
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.pansijing.life"
@@ -42,14 +47,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    // if Java use this. If using Kotlin do NOT use this.
-    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.1.1"
+    compile 'org.greenrobot:greendao:3.2.2'
 
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:4.1.1"
-    compile "com.github.Raizlabs.DBFlow:dbflow:4.1.1"
-
-    // RXJava 2 support
-    compile ("com.github.Raizlabs.DBFlow:dbflow-rx2:4.1.1") {
-        exclude group:'io.reactivex.rxjava2',module:'rxjava'
-    }
 }

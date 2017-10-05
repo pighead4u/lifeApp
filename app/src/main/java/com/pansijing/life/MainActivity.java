@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                     getColumns();
                     return true;
                 case R.id.navigation_notifications:
+//                    List<DiscoverContent> data = new Select().from(DiscoverContent.class)
+//                            .cursorList()
+//                            .getAll();
                     return true;
             }
             return false;
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void accept(List<ColumnAndPerson> columnAndPeople) throws Exception {
                         for (ColumnAndPerson item : columnAndPeople) {
-                            item.save();
                         }
                         Log.e(TAG, "accept: zhiHuColumn-person");
                     }
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 

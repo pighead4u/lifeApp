@@ -1,77 +1,51 @@
 package com.pansijing.life.bean;
 
-import com.raizlabs.android.dbflow.converter.TypeConverter;
+import org.greenrobot.greendao.converter.PropertyConverter;
 
 /**
- * @author: pighead
- * @time: 2017/9/18-下午8:31.
- * @desc:
+ * 创建者：pighead4u
+ * 创建数据：2017/10/5-下午3:37.
+ * 创建说明：zhihu专栏的映射类
+ * <p>
+ * 修改说明：
  */
 
-public class ZhiHuColumnConverter extends TypeConverter<String, ZhiHuColumn> {
+public final class ZhiHuColumnConverter implements PropertyConverter<ZhiHuColumn, String> {
     @Override
-    public String getDBValue(ZhiHuColumn model) {
+    public ZhiHuColumn convertToEntityProperty(String databaseValue) {
+        String[] tmp = databaseValue.split(",");
+        ZhiHuColumn zhiHu = new ZhiHuColumn();
+        zhiHu.last_updated = Integer.valueOf(tmp[0]);
+        zhiHu.description = tmp[1];
+        zhiHu.permission = tmp[2];
+        zhiHu.member_id = Integer.valueOf(tmp[3]);
+        zhiHu.contribute_permission = tmp[4];
+        zhiHu.translated_comment_permission = tmp[5];
+        zhiHu.can_manage = Boolean.valueOf(tmp[6]);
+        zhiHu.intro = tmp[7];
+        zhiHu.url_token = tmp[8];
+        zhiHu.id = Integer.valueOf(tmp[9]);
+        zhiHu.image_path = tmp[10];
+        zhiHu.slug = tmp[11];
+        zhiHu.apply_reason = tmp[12];
+        zhiHu.name = tmp[13];
+        zhiHu.title = tmp[14];
+        zhiHu.url = tmp[15];
+        zhiHu.comment_permission = tmp[16];
+        zhiHu.can_post = Boolean.valueOf(tmp[17]);
+        zhiHu.created = Integer.valueOf(tmp[18]);
+        zhiHu.state = tmp[19];
+        zhiHu.followers = Integer.valueOf(tmp[20]);
+        zhiHu.activate_author_requested = Boolean.valueOf(tmp[21]);
+        zhiHu.following = Boolean.valueOf(tmp[22]);
+        zhiHu.image_url = tmp[23];
+        zhiHu.articles_count = Integer.valueOf(tmp[24]);
 
-        return model == null ? null : String.valueOf(model.last_updated) + "," +
-                model.description + "," +
-                model.permission + "," +
-                String.valueOf(model.member_id) + "," +
-                model.contribute_permission + "," +
-                model.translated_comment_permission + "," +
-                String.valueOf(model.can_manage) + "," +
-                model.intro + "," +
-                model.url_token + "," +
-                String.valueOf(model.id) + "," +
-                model.image_path + "," +
-                model.slug + "," +
-                model.apply_reason + "," +
-                model.name + "," +
-                model.title + "," +
-                model.url + "," +
-                model.comment_permission + "," +
-                String.valueOf(model.can_post) + "," +
-                String.valueOf(model.created) + "," +
-                model.state + "," +
-                String.valueOf(model.followers) + "," +
-                String.valueOf(model.activate_author_requested) + "," +
-                String.valueOf(model.following) + "," +
-                model.image_url + "," +
-                String.valueOf(model.articles_count);
+        return zhiHu;
     }
 
     @Override
-    public ZhiHuColumn getModelValue(String data) {
-        String[] values = data.split(",");
-        if (values.length < 25) {
-            return null;
-        } else {
-            ZhiHuColumn zhiHuColumn = new ZhiHuColumn();
-            zhiHuColumn.last_updated = Integer.valueOf(values[0]);
-            zhiHuColumn.description = values[1];
-            zhiHuColumn.permission = values[2];
-            zhiHuColumn.member_id = Integer.valueOf(values[3]);
-            zhiHuColumn.contribute_permission = values[4];
-            zhiHuColumn.translated_comment_permission = values[5];
-            zhiHuColumn.can_manage = Boolean.valueOf(values[6]);
-            zhiHuColumn.intro = values[7];
-            zhiHuColumn.url_token = values[8];
-            zhiHuColumn.id = Integer.valueOf(values[9]);
-            zhiHuColumn.image_path = values[10];
-            zhiHuColumn.slug = values[11];
-            zhiHuColumn.apply_reason = values[12];
-            zhiHuColumn.name = values[13];
-            zhiHuColumn.title = values[14];
-            zhiHuColumn.url = values[15];
-            zhiHuColumn.comment_permission = values[16];
-            zhiHuColumn.can_post = Boolean.valueOf(values[17]);
-            zhiHuColumn.created = Integer.valueOf(values[18]);
-            zhiHuColumn.state = values[19];
-            zhiHuColumn.followers = Integer.valueOf(values[20]);
-            zhiHuColumn.activate_author_requested = Boolean.valueOf(values[21]);
-            zhiHuColumn.following = Boolean.valueOf(values[22]);
-            zhiHuColumn.image_url = values[23];
-            zhiHuColumn.articles_count = Integer.valueOf(values[24]);
-            return zhiHuColumn;
-        }
+    public String convertToDatabaseValue(ZhiHuColumn entityProperty) {
+        return entityProperty.toString();
     }
 }

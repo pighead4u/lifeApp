@@ -1,67 +1,333 @@
 package com.pansijing.life.bean;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * @author: pighead
  * @time: 2017/9/16-下午10:01.
  * @desc:
  */
-
-@Table(database = ZhiHuDB.class)
-public final class ZhiHuColumn extends BaseModel {
-    @Column
+@Entity
+public final class ZhiHuColumn {
+    
     public int last_updated;
-    @Column
+
     public String description;
-    @Column
+
     public String permission;
-    @Column
+
     public int member_id;
-    @Column
+
     public String contribute_permission;
-    @Column
+
     public String translated_comment_permission;
-    @Column
+
     public boolean can_manage;
-    @Column
+
     public String intro;
-    @Column
+
     public String url_token;
-    @Column
+
     public int id;
-    @Column
+
     public String image_path;
-    @Column
+
     public String slug;
-    @Column
+
     public String apply_reason;
-    @PrimaryKey
+
     public String name;
-    @Column
+
     public String title;
-    @Column
+
     public String url;
-    @Column
+
     public String comment_permission;
-    @Column
+
     public boolean can_post;
-    @Column
+
     public int created;
-    @Column
+
     public String state;
-    @Column
+
     public int followers;
-    @Column
+
     public boolean activate_author_requested;
-    @Column
+
     public boolean following;
-    @Column
+
     public String image_url;
-    @Column
+
     public int articles_count;
 
+    @Generated(hash = 1133553251)
+    public ZhiHuColumn(int last_updated, String description, String permission,
+                       int member_id, String contribute_permission,
+                       String translated_comment_permission, boolean can_manage, String intro,
+                       String url_token, int id, String image_path, String slug,
+                       String apply_reason, String name, String title, String url,
+                       String comment_permission, boolean can_post, int created, String state,
+                       int followers, boolean activate_author_requested, boolean following,
+                       String image_url, int articles_count) {
+        this.last_updated = last_updated;
+        this.description = description;
+        this.permission = permission;
+        this.member_id = member_id;
+        this.contribute_permission = contribute_permission;
+        this.translated_comment_permission = translated_comment_permission;
+        this.can_manage = can_manage;
+        this.intro = intro;
+        this.url_token = url_token;
+        this.id = id;
+        this.image_path = image_path;
+        this.slug = slug;
+        this.apply_reason = apply_reason;
+        this.name = name;
+        this.title = title;
+        this.url = url;
+        this.comment_permission = comment_permission;
+        this.can_post = can_post;
+        this.created = created;
+        this.state = state;
+        this.followers = followers;
+        this.activate_author_requested = activate_author_requested;
+        this.following = following;
+        this.image_url = image_url;
+        this.articles_count = articles_count;
+    }
+
+    @Generated(hash = 1983068659)
+    public ZhiHuColumn() {
+    }
+
+    @Override
+    public String toString() {
+        return last_updated + "," +
+                description + "," +
+                permission + "," +
+                member_id + "," +
+                contribute_permission + "," +
+                translated_comment_permission + "," +
+                can_manage + "," +
+                intro + "," +
+                url_token + "," +
+                id + "," +
+                image_path + "," +
+                slug + "," +
+                apply_reason + "," +
+                name + "," +
+                title + "," +
+                url + "," +
+                comment_permission + "," +
+                can_post + "," +
+                created + "," +
+                state + "," +
+                followers + "," +
+                activate_author_requested + "," +
+                following + "," +
+                image_url + "," +
+                articles_count;
+    }
+
+    public int getLast_updated() {
+        return this.last_updated;
+    }
+
+    public void setLast_updated(int last_updated) {
+        this.last_updated = last_updated;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPermission() {
+        return this.permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public int getMember_id() {
+        return this.member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
+    }
+
+    public String getContribute_permission() {
+        return this.contribute_permission;
+    }
+
+    public void setContribute_permission(String contribute_permission) {
+        this.contribute_permission = contribute_permission;
+    }
+
+    public String getTranslated_comment_permission() {
+        return this.translated_comment_permission;
+    }
+
+    public void setTranslated_comment_permission(
+            String translated_comment_permission) {
+        this.translated_comment_permission = translated_comment_permission;
+    }
+
+    public boolean getCan_manage() {
+        return this.can_manage;
+    }
+
+    public void setCan_manage(boolean can_manage) {
+        this.can_manage = can_manage;
+    }
+
+    public String getIntro() {
+        return this.intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getUrl_token() {
+        return this.url_token;
+    }
+
+    public void setUrl_token(String url_token) {
+        this.url_token = url_token;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImage_path() {
+        return this.image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
+
+    public String getSlug() {
+        return this.slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getApply_reason() {
+        return this.apply_reason;
+    }
+
+    public void setApply_reason(String apply_reason) {
+        this.apply_reason = apply_reason;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getComment_permission() {
+        return this.comment_permission;
+    }
+
+    public void setComment_permission(String comment_permission) {
+        this.comment_permission = comment_permission;
+    }
+
+    public boolean getCan_post() {
+        return this.can_post;
+    }
+
+    public void setCan_post(boolean can_post) {
+        this.can_post = can_post;
+    }
+
+    public int getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(int created) {
+        this.created = created;
+    }
+
+    public String getState() {
+        return this.state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getFollowers() {
+        return this.followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public boolean getActivate_author_requested() {
+        return this.activate_author_requested;
+    }
+
+    public void setActivate_author_requested(boolean activate_author_requested) {
+        this.activate_author_requested = activate_author_requested;
+    }
+
+    public boolean getFollowing() {
+        return this.following;
+    }
+
+    public void setFollowing(boolean following) {
+        this.following = following;
+    }
+
+    public String getImage_url() {
+        return this.image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public int getArticles_count() {
+        return this.articles_count;
+    }
+
+    public void setArticles_count(int articles_count) {
+        this.articles_count = articles_count;
+    }
 }

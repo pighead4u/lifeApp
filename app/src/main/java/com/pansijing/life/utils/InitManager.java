@@ -3,7 +3,6 @@ package com.pansijing.life.utils;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.raizlabs.android.dbflow.config.FlowManager;
 
 /**
  * @author: pighead
@@ -25,6 +24,6 @@ public final class InitManager {
 
     private static void synchInit(Application application) {
         Fresco.initialize(application);
-        FlowManager.init(application);
+        DaoManager.init(application);
     }
 }
