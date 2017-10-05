@@ -11,8 +11,49 @@ import com.pansijing.life.bean.ZhiHuDetail;
  */
 
 public final class ZhiHuDetailBussiness {
+    /**
+     * 标题
+     */
+    private String title;
+    /**
+     * 标题的图片
+     */
+    private String titleImagePath;
+    /**
+     * 专栏的头像
+     */
+    private String avatarPath;
+    /**
+     * 网页的url
+     */
+    private String url;
 
     public void transforData(ZhiHuDetail detail) {
+        title = detail.getTitle();
+        titleImagePath = detail.getTitleImage();
+        avatarPath = transforAvatar(detail.getAuthor().getAvatar());
+        url = detail.getContent();
+    }
 
+    private String transforAvatar(ZhiHuDetail.AuthorEntity.AvatarEntity avatarEntity) {
+        String url = avatarEntity.getTemplate().replace("{id}", avatarEntity.getId());
+
+        return url.replace("{size}", "l");
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getTitleImagePath() {
+        return titleImagePath;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
