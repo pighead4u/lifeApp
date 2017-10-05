@@ -9,7 +9,7 @@ import com.pansijing.life.bean.DiscoverContent;
  * @desc: 发现页面使用的对象
  */
 
-public final class DiscoverContentBussiness {
+final class DiscoverContentBussiness {
 
     /**
      * 头像

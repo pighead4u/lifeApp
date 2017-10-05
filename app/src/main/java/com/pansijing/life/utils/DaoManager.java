@@ -2,6 +2,7 @@ package com.pansijing.life.utils;
 
 import android.app.Application;
 
+import com.pansijing.life.bean.ColumnAndPersonDao;
 import com.pansijing.life.bean.DaoMaster;
 import com.pansijing.life.bean.DaoSession;
 import com.pansijing.life.bean.DiscoverContentDao;
@@ -34,5 +35,9 @@ public final class DaoManager {
 
     public static DiscoverContentDao getDiscoverContentDao() {
         return daoSession.getDiscoverContentDao();
+    }
+
+    public static ColumnAndPersonDao getColumnAndPersonDao() {
+        return daoSession.getColumnAndPersonDao();
     }
 }

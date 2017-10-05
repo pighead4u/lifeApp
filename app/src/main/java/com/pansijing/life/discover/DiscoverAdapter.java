@@ -28,7 +28,6 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
     private static final String TAG = "DiscoverAdapter";
 
-
     private Context mContext;
 
     private List<DiscoverContentBussiness> mData;

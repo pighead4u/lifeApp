@@ -14,7 +14,7 @@ import okhttp3.HttpUrl;
  * @desc:
  */
 
-public final class SimpleCookie implements CookieJar {
+final class SimpleCookie implements CookieJar {
     private final HashMap<String, Cookie> mCookieStore = new HashMap<>();
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {

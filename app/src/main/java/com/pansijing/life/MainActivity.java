@@ -11,6 +11,7 @@ import com.pansijing.life.bean.ColumnAndPerson;
 import com.pansijing.life.discover.DiscoverFragment;
 import com.pansijing.life.http.ColumnHttp;
 import com.pansijing.life.http.RetrofitManager;
+import com.pansijing.life.utils.DaoManager;
 
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void accept(List<ColumnAndPerson> columnAndPeople) throws Exception {
                         for (ColumnAndPerson item : columnAndPeople) {
+                            DaoManager.getColumnAndPersonDao().insert(item);
                         }
                         Log.e(TAG, "accept: zhiHuColumn-person");
                     }
