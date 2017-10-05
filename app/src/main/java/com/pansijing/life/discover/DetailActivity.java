@@ -1,24 +1,36 @@
-package com.pansijing.life;
+package com.pansijing.life.discover;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
+import com.pansijing.life.R;
+import com.pansijing.life.bean.ZhiHuDetail;
+import com.pansijing.life.http.ColumnHttp;
+import com.pansijing.life.http.RetrofitManager;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 public class DetailActivity extends AppCompatActivity {
+
+    private static final String TAG = "DetailActivity";
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,6 +52,12 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        initView();
+        initData();
+
+    }
+
+    private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -58,7 +76,45 @@ public class DetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
 
+    private void initData() {
+        String path = getIntent().getStringExtra("path");
+        RetrofitManager.getRetrofit().create(ColumnHttp.class)
+                .findDetailContent(path)
+                .map(new Function<ZhiHuDetail, ZhiHuDetailBussiness>() {
+                    @Override
+                    public ZhiHuDetailBussiness apply(ZhiHuDetail zhiHuDetail) throws Exception {
+                        ZhiHuDetailBussiness zhiHuDetailBussiness = new ZhiHuDetailBussiness();
+                        zhiHuDetailBussiness.transforData(zhiHuDetail);
+                        return zhiHuDetailBussiness;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ZhiHuDetailBussiness>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ZhiHuDetailBussiness zhiHuDetailBussiness) {
+
+                        Log.e(TAG, "onNext: ");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

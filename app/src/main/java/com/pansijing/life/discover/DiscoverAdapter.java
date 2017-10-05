@@ -1,8 +1,10 @@
 package com.pansijing.life.discover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,19 +48,11 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
     public void onBindViewHolder(DiscoverViewHolder holder, int position) {
         DiscoverContentBussiness contentBussiness = mData.get(position);
 
-//        holder.avatar.setImageURI(contentBussiness.getAvatar());
+        holder.setData(contentBussiness.getDetailPath());
+
         holder.titleImage.setImageURI(contentBussiness.getTitleImage());
 
-//        holder.name.setText(contentBussiness.getName());
         holder.title.setText(contentBussiness.getTitle());
-//        if (Build.VERSION.SDK_INT >= 24) {
-//            holder.summary.setText(Html.fromHtml(contentBussiness.getSummary(), Html.FROM_HTML_MODE_COMPACT));
-//        } else {
-//            holder.summary.setText(Html.fromHtml(contentBussiness.getSummary()));
-//        }
-//        holder.time.setText(contentBussiness.getDate());
-//        holder.likesCount.setText(contentBussiness.getLikesCount());
-//        holder.commentsCount.setText(contentBussiness.getCommentsCount());
 
     }
 
@@ -70,24 +64,12 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
     public static final class DiscoverViewHolder extends ViewHolder {
 
-        //        @BindView(R.id.llAvatar)
-//        SimpleDraweeView avatar;
-//        @BindView(R.id.txtName)
-//        TextView name;
-//        @BindView(R.id.org)
-//        SimpleDraweeView org;
         @BindView(R.id.titleImage)
         SimpleDraweeView titleImage;
         @BindView(R.id.txtTitle)
         TextView title;
-//        @BindView(R.id.txtSummary)
-//        TextView summary;
-//        @BindView(R.id.txtLikesCount)
-//        TextView likesCount;
-//        @BindView(R.id.txtCommentsCount)
-//        TextView commentsCount;
-//        @BindView(R.id.txtTime)
-//        TextView time;
+
+        String path;
 
         public DiscoverViewHolder(View view) {
             super(view);
@@ -96,9 +78,18 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.setClass(view.getContext(), DetailActivity.class);
+                    intent.putExtra("path", path);
+                    view.getContext().startActivity(intent);
 
+                    Log.e(TAG, "onClick: " + path);
                 }
             });
+        }
+
+        public void setData(String path) {
+            this.path = path;
         }
     }
 }

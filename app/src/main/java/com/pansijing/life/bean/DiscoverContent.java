@@ -34,6 +34,7 @@ public class DiscoverContent {
     public String source_url;
 
     public int url_token;
+
     public int slug;
 
     public boolean big_title_image;

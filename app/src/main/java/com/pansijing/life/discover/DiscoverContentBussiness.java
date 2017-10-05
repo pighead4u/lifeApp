@@ -51,6 +51,11 @@ public final class DiscoverContentBussiness {
      */
     private String commentsCount;
 
+    /**
+     * 点击展开的具体http请求的path
+     */
+    private String detailPath;
+
     public void transforData(DiscoverContent discoverContent) {
         this.avatar = transforAvatarURL(discoverContent.author.avatar);
         this.name = discoverContent.author.name;
@@ -60,6 +65,7 @@ public final class DiscoverContentBussiness {
         this.summary = discoverContent.summary;
         this.likesCount = String.valueOf(discoverContent.likesCount);
         this.commentsCount = String.valueOf(discoverContent.commentsCount);
+        this.detailPath = String.valueOf(discoverContent.url_token);
     }
 
     private String transforAvatarURL(Avatar avatar) {
@@ -97,5 +103,9 @@ public final class DiscoverContentBussiness {
 
     public String getCommentsCount() {
         return commentsCount;
+    }
+
+    public String getDetailPath() {
+        return detailPath;
     }
 }
