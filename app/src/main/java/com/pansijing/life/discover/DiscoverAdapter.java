@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,12 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
         holder.setData(contentBussiness.getDetailPath());
 
-        holder.titleImage.setImageURI(contentBussiness.getTitleImage());
+        if (!TextUtils.isEmpty(contentBussiness.getTitleImage())) {
+            holder.titleImage.setImageURI(contentBussiness.getTitleImage());
+        } else {
+            holder.titleImage.setImageURI("https://liukanshan.zhihu.com/images/downloads/avatars/classic/03.png");
+
+        }
 
         holder.title.setText(contentBussiness.getTitle());
 
