@@ -109,6 +109,10 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
