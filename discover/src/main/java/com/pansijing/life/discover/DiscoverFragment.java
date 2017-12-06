@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pansijing.life.R;
+import com.pansijing.life.R2;
 import com.pansijing.life.bean.DiscoverContent;
 import com.pansijing.life.http.ColumnHttp;
 import com.pansijing.life.http.RetrofitManager;
@@ -45,9 +46,9 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     private static final String TAG = "DiscoverFragment";
 
-    @BindView(R.id.discover_content)
+    @BindView(R2.id.discover_content)
     RecyclerView discoverContentView;
-    @BindView(R.id.discover_refresh)
+    @BindView(R2.id.discover_refresh)
     SwipeRefreshLayout discoverRefreshView;
 
     private Unbinder unbinder;

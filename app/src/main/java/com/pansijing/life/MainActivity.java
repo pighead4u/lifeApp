@@ -4,20 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.pansijing.life.bean.ColumnAndPerson;
 import com.pansijing.life.discover.DiscoverFragment;
-import com.pansijing.life.http.ColumnHttp;
-import com.pansijing.life.http.RetrofitManager;
-import com.pansijing.life.utils.DaoManager;
-
-import java.util.List;
-
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-
 
 /**
  * @author: pighead
@@ -50,34 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_dashboard:
-                    getColumns();
                     return true;
                 case R.id.navigation_notifications:
-//                    List<DiscoverContent> data = new Select().from(DiscoverContent.class)
-//                            .cursorList()
-//                            .getAll();
                     return true;
             }
             return false;
         }
     };
-
-
-
-    private void getColumns() {
-        RetrofitManager.getRetrofit().create(ColumnHttp.class)
-                .findNewColumns(10, 0)
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<ColumnAndPerson>>() {
-                    @Override
-                    public void accept(List<ColumnAndPerson> columnAndPeople) throws Exception {
-                        for (ColumnAndPerson item : columnAndPeople) {
-                            DaoManager.getColumnAndPersonDao().insert(item);
-                        }
-                        Log.e(TAG, "accept: zhiHuColumn-person");
-                    }
-                });
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,12 +8,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pansijing.life.R;
+import com.pansijing.life.R2;
 import com.pansijing.life.bean.ZhiHuDetail;
 import com.pansijing.life.http.ColumnHttp;
 import com.pansijing.life.http.RetrofitManager;
@@ -30,19 +29,19 @@ public class DetailActivity extends AppCompatActivity {
 
     private static final String TAG = "DetailActivity";
 
-    @BindView(R.id.backdrop)
+    @BindView(R2.id.backdrop)
     SimpleDraweeView titleImage;
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.collapsing_toolbar)
+    @BindView(R2.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @BindView(R.id.appbar)
+    @BindView(R2.id.appbar)
     AppBarLayout appbar;
-    @BindView(R.id.main_content)
+    @BindView(R2.id.main_content)
     CoordinatorLayout mainContent;
-    @BindView(R.id.detail_content)
+    @BindView(R2.id.detail_content)
     WebView detailContent;
-    @BindView(R.id.btn_avatar)
+    @BindView(R2.id.btn_avatar)
     FloatingActionButton btnAvatar;
 
     @Override
@@ -112,28 +111,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

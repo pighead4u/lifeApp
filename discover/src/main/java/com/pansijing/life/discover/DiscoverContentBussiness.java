@@ -4,7 +4,7 @@ import com.pansijing.life.bean.Avatar;
 import com.pansijing.life.bean.DiscoverContent;
 
 /**
- * @author: zhuhuanhuan
+ * @author: pighead4u
  * @time: 2017/9/30-下午1:14.
  * @desc: 发现页面使用的对象
  */

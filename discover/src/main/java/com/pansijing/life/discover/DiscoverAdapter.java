@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pansijing.life.R;
+import com.pansijing.life.R2;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * @author: zhuhuanhuan
+ * @author: pighead4u
  * @time: 2017/9/21-下午8:48.
  * @desc:
  */
@@ -54,7 +55,6 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
             holder.titleImage.setImageURI(contentBussiness.getTitleImage());
         } else {
             holder.titleImage.setImageURI("https://liukanshan.zhihu.com/images/downloads/avatars/classic/03.png");
-
         }
 
         holder.title.setText(contentBussiness.getTitle());
@@ -69,9 +69,9 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
     public static final class DiscoverViewHolder extends ViewHolder {
 
-        @BindView(R.id.titleImage)
+        @BindView(R2.id.titleImage)
         SimpleDraweeView titleImage;
-        @BindView(R.id.txtTitle)
+        @BindView(R2.id.txtTitle)
         TextView title;
 
         String path;
