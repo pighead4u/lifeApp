@@ -35,9 +35,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
     private List<DiscoverContentBussiness> mData;
 
 
-    public DiscoverAdapter(Context context, List<DiscoverContentBussiness> contents) {
+    public DiscoverAdapter(Context context) {
         mContext = context;
-        mData = contents;
     }
 
     @Override
@@ -64,6 +63,10 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
     @Override
     public int getItemCount() {
         return mData == null ? 0 : mData.size();
+    }
+
+    public void changeData(List<DiscoverContentBussiness> contents) {
+        mData = contents;
     }
 
 
