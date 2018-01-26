@@ -23,11 +23,11 @@ public class DiscoverPresenter {
     DiscoverDao dao;
 
     public DiscoverPresenter(Context context) {
-        dao = Room.inMemoryDatabaseBuilder(context.getApplicationContext(),
-                AppDatabase.class).build().discoverDao();
+        dao = Room.databaseBuilder(context.getApplicationContext(),
+                AppDatabase.class, "daily").build().discoverDao();
     }
 
-    public void saveData(DiscoverContent content) {
+    public void saveData(List<DiscoverContent> content) {
         try {
             dao.insertAll(content);
 

@@ -22,5 +22,5 @@ public interface DiscoverDao {
     Flowable<List<DiscoverContent>> getAll();
 
     @Insert
-    void insertAll(DiscoverContent... contents);
+    void insertAll(List<DiscoverContent> contents);
 }

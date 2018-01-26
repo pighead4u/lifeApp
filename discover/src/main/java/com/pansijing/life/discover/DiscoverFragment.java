@@ -101,9 +101,7 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
                     @Override
                     public List<DiscoverContentBussiness> apply(List<DiscoverContent> data) throws Exception {
                         List<DiscoverContentBussiness> bussinesses = new ArrayList<>();
-                        Log.e(TAG, "apply:size" + data.size());
                         for (DiscoverContent item : data) {
-                            Log.e(TAG, "apply: " + item);
                             DiscoverContentBussiness discoverContentBussiness = new DiscoverContentBussiness();
                             discoverContentBussiness.transforData(item);
 
@@ -133,11 +131,10 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
                 .map(new Function<List<DiscoverContent>, List<DiscoverContentBussiness>>() {
                     @Override
                     public List<DiscoverContentBussiness> apply(List<DiscoverContent> discoverContents) throws Exception {
-                        Log.e(TAG, "apply: getcookies");
                         List<DiscoverContentBussiness> data = new ArrayList<>();
+                        mPresenter.saveData(discoverContents);
 
                         for (DiscoverContent item : discoverContents) {
-                            mPresenter.saveData(item);
                             DiscoverContentBussiness content = new DiscoverContentBussiness();
                             content.transforData(item);
 
