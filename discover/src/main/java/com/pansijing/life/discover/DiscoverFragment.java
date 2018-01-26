@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import com.pansijing.life.R2;
 import com.pansijing.life.bean.DiscoverContent;
 import com.pansijing.life.http.ColumnHttp;
 import com.pansijing.life.http.RetrofitManager;
-import com.pansijing.life.utils.DaoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleObserver;
-import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -59,7 +54,7 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
      */
     private List<DiscoverContentBussiness> mData;
 
-    private boolean mIsRefresh;
+    private DiscoverPresenter mPresenter;
 
     @Nullable
     @Override
@@ -93,48 +88,41 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void initData() {
-        mIsRefresh = false;
+        mPresenter = new DiscoverPresenter(getActivity());
+
         mData = new ArrayList<>();
         mAdapter = new DiscoverAdapter(getActivity(), mData);
 
         discoverContentView.setAdapter(mAdapter);
 
-        Single.create(new SingleOnSubscribe<List<DiscoverContentBussiness>>() {
-            @Override
-            public void subscribe(SingleEmitter<List<DiscoverContentBussiness>> emitter) throws Exception {
-                List<DiscoverContent> data = DaoManager.getDiscoverContentDao()
-                        .queryBuilder()
-                        .list();
 
-                List<DiscoverContentBussiness> bussinesses = new ArrayList<>();
-                for (DiscoverContent item : data) {
-                    DiscoverContentBussiness discoverContentBussiness = new DiscoverContentBussiness();
-                    discoverContentBussiness.transforData(item);
-
-                    bussinesses.add(discoverContentBussiness);
-                }
-
-                emitter.onSuccess(bussinesses);
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<DiscoverContentBussiness>>() {
+        mPresenter.getAllData()
+                .map(new Function<List<DiscoverContent>, List<DiscoverContentBussiness>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public List<DiscoverContentBussiness> apply(List<DiscoverContent> data) throws Exception {
+                        List<DiscoverContentBussiness> bussinesses = new ArrayList<>();
+                        Log.e(TAG, "apply:size" + data.size());
+                        for (DiscoverContent item : data) {
+                            Log.e(TAG, "apply: " + item);
+                            DiscoverContentBussiness discoverContentBussiness = new DiscoverContentBussiness();
+                            discoverContentBussiness.transforData(item);
 
+                            bussinesses.add(discoverContentBussiness);
+                        }
+                        return bussinesses;
                     }
-
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<DiscoverContentBussiness>>() {
                     @Override
-                    public void onSuccess(List<DiscoverContentBussiness> discoverContents) {
-                        mData.addAll(discoverContents);
+                    public void accept(List<DiscoverContentBussiness> bussinesses) throws Exception {
+                        mData.clear();
+                        mData.addAll(bussinesses);
                         mAdapter.notifyDataSetChanged();
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
                 });
+
 
     }
 
@@ -145,10 +133,11 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
                 .map(new Function<List<DiscoverContent>, List<DiscoverContentBussiness>>() {
                     @Override
                     public List<DiscoverContentBussiness> apply(List<DiscoverContent> discoverContents) throws Exception {
+                        Log.e(TAG, "apply: getcookies");
                         List<DiscoverContentBussiness> data = new ArrayList<>();
 
                         for (DiscoverContent item : discoverContents) {
-                            DaoManager.getDiscoverContentDao().save(item);
+                            mPresenter.saveData(item);
                             DiscoverContentBussiness content = new DiscoverContentBussiness();
                             content.transforData(item);
 
@@ -163,11 +152,10 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
                     @Override
                     public void accept(List<DiscoverContentBussiness> discoverContents) throws Exception {
 
-                        if (mIsRefresh) {
-//                            mData.clear();
-                            discoverRefreshView.setRefreshing(false);
-                            mIsRefresh = false;
-                        }
+                        Log.e(TAG, "accept: ");
+
+                        mData.clear();
+                        discoverRefreshView.setRefreshing(false);
 
                         mData.addAll(discoverContents);
                         mAdapter.notifyDataSetChanged();
@@ -183,12 +171,8 @@ public class DiscoverFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        //检查是否处于刷新状态
-        if (!mIsRefresh) {
-            mIsRefresh = true;
 
-            getCookies();
-        }
+        getCookies();
 
 
     }

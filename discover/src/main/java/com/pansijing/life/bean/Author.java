@@ -1,15 +1,16 @@
 package com.pansijing.life.bean;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * @author: pighead
  * @time: 2017/9/16-下午9:59.
  * @desc:
  */
-
 @Entity
 public final class Author {
       
@@ -18,45 +19,27 @@ public final class Author {
     public boolean isFollowing;
 
     public String hash;
-
+    @PrimaryKey
+    @ColumnInfo(name = "author_uid")
     public long uid;
 
     public boolean isOrg;
-
+    @ColumnInfo(name = "author_slug")
     public String slug;
 
     public boolean isFollowed;
-
+    @ColumnInfo(name = "author_desciption")
     public String description;
-
+    @ColumnInfo(name = "author_name")
     public String name;
 
     public String profileUrl;
 
     public boolean isOrgWhiteList;
 
-    @Convert(converter = AvatarConverter.class, columnType = String.class)
+    @Embedded
     public Avatar avatar;
 
-    @Generated(hash = 1036687781)
-    public Author(String bio, boolean isFollowing, String hash, long uid,
-                  boolean isOrg, String slug, boolean isFollowed, String description,
-                  String name, String profileUrl, boolean isOrgWhiteList, Avatar avatar) {
-        this.bio = bio;
-        this.isFollowing = isFollowing;
-        this.hash = hash;
-        this.uid = uid;
-        this.isOrg = isOrg;
-        this.slug = slug;
-        this.isFollowed = isFollowed;
-        this.description = description;
-        this.name = name;
-        this.profileUrl = profileUrl;
-        this.isOrgWhiteList = isOrgWhiteList;
-        this.avatar = avatar;
-    }
-
-    @Generated(hash = 64241762)
     public Author() {
     }
 

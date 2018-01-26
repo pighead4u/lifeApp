@@ -1,20 +1,20 @@
 package com.pansijing.life.bean;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * @author: pighead
  * @time: 2017/9/16-下午10:05.
  * @desc:
  */
-
 @Entity
 public final class ColumnAndPerson {
      
     public int followersCount;
-
+    @PrimaryKey
     public String name;
 
     public String url;
@@ -25,22 +25,9 @@ public final class ColumnAndPerson {
 
     public String slug;
 
-    @Convert(converter = AvatarConverter.class, columnType = String.class)
+    @Embedded
     public Avatar avatar;
 
-    @Generated(hash = 1975360588)
-    public ColumnAndPerson(int followersCount, String name, String url,
-                           int postsCount, String description, String slug, Avatar avatar) {
-        this.followersCount = followersCount;
-        this.name = name;
-        this.url = url;
-        this.postsCount = postsCount;
-        this.description = description;
-        this.slug = slug;
-        this.avatar = avatar;
-    }
-
-    @Generated(hash = 1469211948)
     public ColumnAndPerson() {
     }
 

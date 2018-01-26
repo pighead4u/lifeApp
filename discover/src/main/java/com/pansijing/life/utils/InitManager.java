@@ -24,6 +24,5 @@ public final class InitManager {
 
     private static void synchInit(Application application) {
         Fresco.initialize(application);
-        DaoManager.init(application);
     }
 }

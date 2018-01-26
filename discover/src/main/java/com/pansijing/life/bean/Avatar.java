@@ -1,7 +1,9 @@
 package com.pansijing.life.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * @author: pighead
@@ -10,20 +12,15 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public final class Avatar {
-
+    @PrimaryKey
+    @ColumnInfo(name = "avatar_id")
     public String id;
 
     public String template;
 
-    @Generated(hash = 723749969)
-    public Avatar(String id, String template) {
-        this.id = id;
-        this.template = template;
-    }
-
-    @Generated(hash = 1438353277)
     public Avatar() {
     }
+
 
     @Override
     public String toString() {

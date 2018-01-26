@@ -1,7 +1,9 @@
 package com.pansijing.life.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * @author: pighead
@@ -13,10 +15,13 @@ public final class ZhiHuColumn {
     
     public int last_updated;
 
+    @ColumnInfo(name = "zhihu_description")
     public String description;
 
     public String permission;
 
+    @PrimaryKey
+    @ColumnInfo(name = "zhihucolumn_member_id")
     public int member_id;
 
     public String contribute_permission;
@@ -29,14 +34,16 @@ public final class ZhiHuColumn {
 
     public String url_token;
 
+    @ColumnInfo(name = "zhihu_id")
     public int id;
 
     public String image_path;
 
+    @ColumnInfo(name = "zhihu_slug")
     public String slug;
 
     public String apply_reason;
-
+    @ColumnInfo(name = "zhihu_name")
     public String name;
 
     public String title;
@@ -61,43 +68,6 @@ public final class ZhiHuColumn {
 
     public int articles_count;
 
-    @Generated(hash = 1133553251)
-    public ZhiHuColumn(int last_updated, String description, String permission,
-                       int member_id, String contribute_permission,
-                       String translated_comment_permission, boolean can_manage, String intro,
-                       String url_token, int id, String image_path, String slug,
-                       String apply_reason, String name, String title, String url,
-                       String comment_permission, boolean can_post, int created, String state,
-                       int followers, boolean activate_author_requested, boolean following,
-                       String image_url, int articles_count) {
-        this.last_updated = last_updated;
-        this.description = description;
-        this.permission = permission;
-        this.member_id = member_id;
-        this.contribute_permission = contribute_permission;
-        this.translated_comment_permission = translated_comment_permission;
-        this.can_manage = can_manage;
-        this.intro = intro;
-        this.url_token = url_token;
-        this.id = id;
-        this.image_path = image_path;
-        this.slug = slug;
-        this.apply_reason = apply_reason;
-        this.name = name;
-        this.title = title;
-        this.url = url;
-        this.comment_permission = comment_permission;
-        this.can_post = can_post;
-        this.created = created;
-        this.state = state;
-        this.followers = followers;
-        this.activate_author_requested = activate_author_requested;
-        this.following = following;
-        this.image_url = image_url;
-        this.articles_count = articles_count;
-    }
-
-    @Generated(hash = 1983068659)
     public ZhiHuColumn() {
     }
 

@@ -1,60 +1,60 @@
 package com.pansijing.life.bean;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
 
 /**
  * @author: pighead
  * @time: 2017/9/16-下午9:49.
  * @desc:
  */
-
-@Entity
+@Entity(primaryKeys = {"orig_author_id", "discover_created"})
 public class DiscoverContent {
 
     public String titleImage;
 
+    @ColumnInfo(name = "discover_image_path")
     public String image_path;
-
+    @ColumnInfo(name = "discover_permission")
     public String permission;
 
     public String summary;
 
     public String copy_permission;
-
+    @ColumnInfo(name = "discover_translated_comment_permission")
     public String translated_comment_permission;
 
     public int likes;
-
     public int orig_author_id;
 
     public String publishedTime;
 
     public String source_url;
-
+    @ColumnInfo(name = "discover_url_token")
     public int url_token;
-
+    @ColumnInfo(name = "discover_slug")
     public int slug;
 
     public boolean big_title_image;
-
+    @ColumnInfo(name = "discover_title")
     public String title;
-
+    @ColumnInfo(name = "discover_url")
     public String url;
-
+    @ColumnInfo(name = "discover_comment_permission")
     public String comment_permission;
 
     public String snapshot_url;
-
+    @ColumnInfo(name = "discover_created")
     public int created;
 
     public int comments;
 
     public String content;
-
+    @ColumnInfo(name = "discover_state")
     public String state;
-
+    @ColumnInfo(name = "discover_image_url")
     public String image_url;
 
     public String excerpt_title;
@@ -64,52 +64,11 @@ public class DiscoverContent {
     public int commentsCount;
 
     public int likesCount;
-    @Convert(converter = AuthorConverter.class, columnType = String.class)
+    @Embedded
     public Author author;
-    @Convert(converter = ZhiHuColumnConverter.class, columnType = String.class)
+    @Embedded
     public ZhiHuColumn zhiHuColumn;
 
-    @Generated(hash = 1436193343)
-    public DiscoverContent(String titleImage, String image_path, String permission,
-                           String summary, String copy_permission,
-                           String translated_comment_permission, int likes, int orig_author_id,
-                           String publishedTime, String source_url, int url_token, int slug,
-                           boolean big_title_image, String title, String url,
-                           String comment_permission, String snapshot_url, int created,
-                           int comments, String content, String state, String image_url,
-                           String excerpt_title, String vote_type, int commentsCount,
-                           int likesCount, Author author, ZhiHuColumn zhiHuColumn) {
-        this.titleImage = titleImage;
-        this.image_path = image_path;
-        this.permission = permission;
-        this.summary = summary;
-        this.copy_permission = copy_permission;
-        this.translated_comment_permission = translated_comment_permission;
-        this.likes = likes;
-        this.orig_author_id = orig_author_id;
-        this.publishedTime = publishedTime;
-        this.source_url = source_url;
-        this.url_token = url_token;
-        this.slug = slug;
-        this.big_title_image = big_title_image;
-        this.title = title;
-        this.url = url;
-        this.comment_permission = comment_permission;
-        this.snapshot_url = snapshot_url;
-        this.created = created;
-        this.comments = comments;
-        this.content = content;
-        this.state = state;
-        this.image_url = image_url;
-        this.excerpt_title = excerpt_title;
-        this.vote_type = vote_type;
-        this.commentsCount = commentsCount;
-        this.likesCount = likesCount;
-        this.author = author;
-        this.zhiHuColumn = zhiHuColumn;
-    }
-
-    @Generated(hash = 282870564)
     public DiscoverContent() {
     }
 
