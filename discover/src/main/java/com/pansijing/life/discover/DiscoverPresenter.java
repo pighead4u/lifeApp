@@ -30,6 +30,9 @@ public class DiscoverPresenter implements DiscoverContact.Presenter {
     DiscoverDao dao;
     DiscoverContact.View mView;
 
+    int limit = 10;
+    int offset = 0;
+
     public DiscoverPresenter(Context context, DiscoverContact.View view) {
         mView = view;
         dao = Room.databaseBuilder(context.getApplicationContext(),
@@ -52,8 +55,10 @@ public class DiscoverPresenter implements DiscoverContact.Presenter {
 
     @Override
     public void refreshData() {
+        offset += limit;
+
         RetrofitManager.getRetrofit().create(ColumnHttp.class)
-                .findNewContent(10, 0)
+                .findNewContent(limit, offset)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<List<DiscoverContent>, List<DiscoverContentBussiness>>() {
                     @Override
